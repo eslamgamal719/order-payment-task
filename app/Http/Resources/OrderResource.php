@@ -18,11 +18,11 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'status' => $this->status,
             'isPayable' => $this->status === 'confirmed',
-            'total_amount' => $this->total_amount,
+            'totalAmount' => $this->total_amount,
             'items' => OrderItemResource::collection($this->whenLoaded('items')),
             'user' => new UserResource($this->whenLoaded('user')),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'createdAt' => $this->created_at,
+            'updatedAt' => $this->updated_at,
         ];
     }
 }
