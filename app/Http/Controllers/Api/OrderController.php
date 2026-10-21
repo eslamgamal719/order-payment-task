@@ -10,11 +10,23 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
 class OrderController extends Controller
 {
+    public function index(Request $request): JsonResponse
+    {
+        $orders = $request->user()
+            ->orders()
+            ->with('items')
+            ->latest()
+            ->get();
+
+        return ApiHelper::customResponse(OrderResource::collection($orders));
+    }
+
     public function store(StoreOrderRequest $request): JsonResponse
     {
         try {
