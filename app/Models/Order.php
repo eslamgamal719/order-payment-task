@@ -13,18 +13,13 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'product_id',
-        'quantity',
-        'unit_price',
-        'total_amount',
         'status',
+        'total_amount',
     ];
 
     protected function casts(): array
     {
         return [
-            'quantity' => 'integer',
-            'unit_price' => 'decimal:2',
             'total_amount' => 'decimal:2',
         ];
     }
@@ -34,9 +29,9 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function product(): BelongsTo
+    public function items(): HasMany
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(OrderItem::class);
     }
 
     public function payments(): HasMany
