@@ -13,15 +13,17 @@ class PaymentSeeder extends Seeder
      */
     public function run(): void
     {
-        $confirmedOrderIds = Order::where('status', 'confirmed')->pluck('id');
+        $confirmedOrders = Order::where('status', 'confirmed')->get();
 
-        if ($confirmedOrderIds->isEmpty()) {
+        if ($confirmedOrders->isEmpty()) {
             return;
         }
 
-        Payment::factory()
-            ->count($confirmedOrderIds->count())
-            ->sequence(fn ($sequence) => ['order_id' => $confirmedOrderIds[$sequence->index]])
-            ->create();
+        $confirmedOrders->each(function (Order $order) {
+            Payment::factory()->create([
+                'order_id' => $order->id,
+                'amount' => $order->total_amount,
+            ]);
+        });
     }
 }
