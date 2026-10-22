@@ -132,4 +132,25 @@ class OrderController extends Controller
 
         return ApiHelper::customResponse(new OrderResource($order->load('items', 'user')));
     }
+
+    public function destroy(Request $request, Order $order): JsonResponse
+    {
+        if ($order->user_id !== $request->user()->id) {
+            return ApiHelper::customResponse('Order not found.', 404);
+        }
+
+        if ($order->payments()->where('status', 'successful')->exists()) {
+            return ApiHelper::customResponse('Order has already been paid and cannot be deleted.', 422);
+        }
+
+        DB::transaction(function () use ($order) {
+            foreach ($order->items as $item) {
+                Product::where('id', $item->product_id)->increment('stock', $item->quantity);
+            }
+
+            $order->delete();
+        });
+
+        return ApiHelper::customResponse('Order deleted.');
+    }
 }
