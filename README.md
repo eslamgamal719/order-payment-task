@@ -6,7 +6,6 @@ A Laravel 12 API for managing orders and payments, with JWT authentication and a
 
 - PHP 8.2+
 - Composer
-- Node.js & npm
 - SQLite (default) or another database supported by Laravel
 
 ## Setup Instructions
@@ -48,41 +47,18 @@ A Laravel 12 API for managing orders and payments, with JWT authentication and a
    php artisan migrate
    ```
 
-5. **Install JS dependencies and build assets** (optional, only needed for front-end assets)
-
-   ```bash
-   npm install
-   npm run build
-   ```
-
-6. **Serve the application**
+5. **Serve the application**
 
    ```bash
    php artisan serve
    ```
 
-7. **Run the test suite**
+6. **Run the test suite**
 
    ```bash
    composer test
    ```
 
-## API Overview
-
-| Method | Endpoint                     | Description                      | Auth |
-|--------|-------------------------------|-----------------------------------|------|
-| POST   | `/api/register`               | Register a new user               | No   |
-| POST   | `/api/login`                  | Log in and receive a JWT          | No   |
-| POST   | `/api/logout`                 | Log out the current user          | Yes  |
-| POST   | `/api/refresh`                | Refresh the JWT                   | Yes  |
-| GET    | `/api/orders`                 | List the authenticated user's orders | Yes |
-| POST   | `/api/orders`                 | Create an order                   | Yes  |
-| PATCH  | `/api/orders/{order}`         | Update an order                   | Yes  |
-| DELETE | `/api/orders/{order}`         | Delete an order                   | Yes  |
-| GET    | `/api/orders/{order}/payments`| List payments for an order        | Yes  |
-| POST   | `/api/orders/{order}/payments`| Charge a payment for an order     | Yes  |
-
-Authenticated routes expect a `Bearer` JWT in the `Authorization` header.
 
 ## Payment Gateway Extensibility
 
@@ -98,13 +74,6 @@ Payments are built around a small abstraction so new gateways can be added witho
 - `config/payments.php` — maps a payment method key (e.g. `stripe`) to its gateway class. This is the single place a new gateway gets registered.
 - `Gateways/StripeGateway.php` — the reference implementation, charging via Stripe's Payment Intents API.
 
-**How a payment request flows:**
-
-1. `StorePaymentRequest::rules()` validates `method` against `PaymentGatewayFactory::supported()`, then merges in that gateway's own `rules()`.
-2. `PaymentController::store()` resolves the gateway with `PaymentGatewayFactory::make($method)` and calls `charge($order->total_amount, $request->validated())` inside a DB transaction.
-3. The returned `PaymentResult` is persisted as a `Payment` record (`successful` → status `successful`/`failed`, plus the gateway's `transactionReference`).
-
-Because the controller, form request, and `Payment` model only ever depend on `PaymentMethodInterface` and `PaymentResult`, adding a gateway never requires changing any of them.
 
 ### Adding a new payment gateway
 
