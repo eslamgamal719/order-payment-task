@@ -18,8 +18,13 @@ class OrderController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
+        $request->validate([
+            'status' => ['sometimes', 'string', 'in:pending,confirmed,cancelled'],
+        ]);
+
         $orders = $request->user()
             ->orders()
+            ->when($request->filled('status'), fn ($query) => $query->where('status', $request->query('status')))
             ->with('items')
             ->latest()
             ->get();
