@@ -20,6 +20,7 @@ class OrderController extends Controller
     {
         $request->validate([
             'status' => ['sometimes', 'string', 'in:pending,confirmed,cancelled'],
+            'perPage' => ['sometimes', 'integer', 'min:1', 'max:100'],
         ]);
 
         $orders = $request->user()
@@ -27,9 +28,9 @@ class OrderController extends Controller
             ->when($request->filled('status'), fn ($query) => $query->where('status', $request->query('status')))
             ->with('items')
             ->latest()
-            ->get();
+            ->paginate($request->integer('perPage', 15));
 
-        return ApiHelper::customResponse(OrderResource::collection($orders));
+        return ApiHelper::paginatedResponse(OrderResource::collection($orders), $orders);
     }
 
     public function store(OrderRequest $request): JsonResponse

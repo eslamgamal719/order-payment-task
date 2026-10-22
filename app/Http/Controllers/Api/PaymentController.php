@@ -62,6 +62,8 @@ class PaymentController extends Controller
             return ApiHelper::customResponse('Forbidden.', 403);
         }
 
-        return ApiHelper::customResponse(PaymentResource::collection($order->payments()->latest()->get()));
+        $payments = $order->payments()->latest()->paginate($request->integer('perPage', 15));
+
+        return ApiHelper::paginatedResponse(PaymentResource::collection($payments), $payments);
     }
 }

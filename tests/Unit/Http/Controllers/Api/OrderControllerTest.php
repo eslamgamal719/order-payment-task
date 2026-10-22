@@ -14,7 +14,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 
-
 class OrderControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -61,6 +60,25 @@ class OrderControllerTest extends TestCase
 
         $this->assertCount(1, $data['result']);
         $this->assertSame('confirmed', $data['result'][0]['status']);
+    }
+
+    public function test_index_paginates_orders(): void
+    {
+        $user = User::factory()->create();
+        Order::factory()->for($user)->count(3)->create();
+
+        $request = $this->makeRequest(Request::class, ['perPage' => 2], $user, 'GET');
+
+        $response = (new OrderController)->index($request);
+        $data = $response->getData(true);
+
+        $this->assertCount(2, $data['result']);
+        $this->assertSame([
+            'currentPage' => 1,
+            'perPage' => 2,
+            'total' => 3,
+            'lastPage' => 2,
+        ], $data['pagination']);
     }
 
     public function test_store_creates_order_and_decrements_stock(): void
