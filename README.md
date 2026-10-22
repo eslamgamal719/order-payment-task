@@ -1,58 +1,156 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Order & Payment Task
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel 12 API for managing orders and payments, with JWT authentication and an extensible payment gateway system (currently shipping with Stripe).
 
-## About Laravel
+## Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP 8.2+
+- Composer
+- Node.js & npm
+- SQLite (default) or another database supported by Laravel
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Setup Instructions
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Clone the repository**
 
-## Learning Laravel
+   ```bash
+   git clone <repo-url>
+   cd ecommerce
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+2. **Install PHP dependencies**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   ```bash
+   composer install
+   ```
 
-## Laravel Sponsors
+3. **Configure environment**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-### Premium Partners
+   Then edit `.env` and set the following:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+   - `DB_CONNECTION` and related `DB_*` values (defaults to `sqlite`; create the file with `touch database/database.sqlite` if it doesn't exist).
+   - `JWT_SECRET` — generate one with:
 
-## Contributing
+     ```bash
+     php artisan jwt:secret
+     ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   - `STRIPE_KEY` and `STRIPE_SECRET` — required for the Stripe payment gateway.
 
-## Code of Conduct
+4. **Run database migrations**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   ```bash
+   php artisan migrate
+   ```
 
-## Security Vulnerabilities
+5. **Install JS dependencies and build assets** (optional, only needed for front-end assets)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   ```bash
+   npm install
+   npm run build
+   ```
+
+6. **Serve the application**
+
+   ```bash
+   php artisan serve
+   ```
+
+7. **Run the test suite**
+
+   ```bash
+   composer test
+   ```
+
+## API Overview
+
+| Method | Endpoint                     | Description                      | Auth |
+|--------|-------------------------------|-----------------------------------|------|
+| POST   | `/api/register`               | Register a new user               | No   |
+| POST   | `/api/login`                  | Log in and receive a JWT          | No   |
+| POST   | `/api/logout`                 | Log out the current user          | Yes  |
+| POST   | `/api/refresh`                | Refresh the JWT                   | Yes  |
+| GET    | `/api/orders`                 | List the authenticated user's orders | Yes |
+| POST   | `/api/orders`                 | Create an order                   | Yes  |
+| PATCH  | `/api/orders/{order}`         | Update an order                   | Yes  |
+| DELETE | `/api/orders/{order}`         | Delete an order                   | Yes  |
+| GET    | `/api/orders/{order}/payments`| List payments for an order        | Yes  |
+| POST   | `/api/orders/{order}/payments`| Charge a payment for an order     | Yes  |
+
+Authenticated routes expect a `Bearer` JWT in the `Authorization` header.
+
+## Payment Gateway Extensibility
+
+Payments are built around a small abstraction so new gateways can be added without touching the controller, request validation, or any existing gateway code.
+
+**Key pieces** (`app/Services/Payments/`):
+
+- `PaymentMethodInterface` — the contract every gateway implements:
+  - `rules(): array` — gateway-specific validation rules, merged into `StorePaymentRequest` at request time.
+  - `charge(float $amount, array $options = []): PaymentResult` — performs the charge and returns the outcome.
+- `PaymentResult` — an immutable DTO (`successful`, `transactionReference`, `message`) returned by every gateway, regardless of provider.
+- `PaymentGatewayFactory` — resolves a gateway instance from the `method` key in the request (`PaymentGatewayFactory::make('stripe')`) via the Laravel container, and exposes `PaymentGatewayFactory::supported()` (used for validating the `method` field).
+- `config/payments.php` — maps a payment method key (e.g. `stripe`) to its gateway class. This is the single place a new gateway gets registered.
+- `Gateways/StripeGateway.php` — the reference implementation, charging via Stripe's Payment Intents API.
+
+**How a payment request flows:**
+
+1. `StorePaymentRequest::rules()` validates `method` against `PaymentGatewayFactory::supported()`, then merges in that gateway's own `rules()`.
+2. `PaymentController::store()` resolves the gateway with `PaymentGatewayFactory::make($method)` and calls `charge($order->total_amount, $request->validated())` inside a DB transaction.
+3. The returned `PaymentResult` is persisted as a `Payment` record (`successful` → status `successful`/`failed`, plus the gateway's `transactionReference`).
+
+Because the controller, form request, and `Payment` model only ever depend on `PaymentMethodInterface` and `PaymentResult`, adding a gateway never requires changing any of them.
+
+### Adding a new payment gateway
+
+1. **Create the gateway class** under `app/Services/Payments/Gateways/`, implementing `PaymentMethodInterface`:
+
+   ```php
+   namespace App\Services\Payments\Gateways;
+
+   use App\Services\Payments\PaymentMethodInterface;
+   use App\Services\Payments\PaymentResult;
+
+   class NewGateway implements PaymentMethodInterface
+   {
+       public function rules(): array
+       {
+           return [
+               // gateway-specific fields required in the payment request
+           ];
+       }
+
+       public function charge(float $amount, array $options = []): PaymentResult
+       {
+           // call the provider's API and map its response to a PaymentResult
+           return new PaymentResult(
+               successful: true,
+               transactionReference: '...',
+               message: '...',
+           );
+       }
+   }
+   ```
+
+2. **Add any required credentials/config** to `config/services.php` and `.env.example`, then inject them into the constructor (see `StripeGateway`, which injects `services.stripe.secret` via `#[Config(...)]`).
+
+3. **Register the gateway** in `config/payments.php`:
+
+   ```php
+   'gateways' => [
+       'stripe' => StripeGateway::class,
+       'new_gateway' => NewGateway::class,
+   ],
+   ```
+
+4. **Done.** The `method` field now accepts `new_gateway`, `StorePaymentRequest` automatically validates against its `rules()`, and `PaymentController` can charge through it — no other code changes needed.
+
+5. **Add tests** covering `rules()` and `charge()` (success, failure, and unreachable-gateway cases), following the existing Stripe gateway tests.
 
 ## License
 
