@@ -1,0 +1,1855 @@
+{
+  "info": {
+    "_postman_id": "b242add3-1a92-467f-bb27-20dcb07fbeb1",
+    "name": "ORDER_PAYMENT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19899474",
+    "_collection_link": "https://go.postman.co/collection/19899474-b242add3-1a92-467f-bb27-20dcb07fbeb1?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "eslam",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "eslam1@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "123456789",
+                  "type": "text"
+                },
+                {
+                  "key": "password_confirmation",
+                  "value": "123456789",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/register",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "validation_error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "eslam",
+                      "type": "text"
+                    },
+                    {
+                      "key": "email",
+                      "value": "eslam@gmail.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123456789",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password_confirmation",
+                      "value": "dsfsdfsdff",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/register",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Wed, 21 Oct 2026 12:41:41 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 422,\n  \"success\": false,\n  \"error\": {\n    \"password\": [\n      \"The password field confirmation does not match.\"\n    ]\n  },\n  \"message\": \"The password field confirmation does not match.\"\n}"
+            },
+            {
+              "name": "register",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "eslam",
+                      "type": "text"
+                    },
+                    {
+                      "key": "email",
+                      "value": "eslam@gmail.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123456789",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password_confirmation",
+                      "value": "123456789",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/register",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Wed, 21 Oct 2026 12:42:15 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 200,\n  \"success\": true,\n  \"result\": {\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNzkyNTg2NTM1LCJleHAiOjE3OTI1OTAxMzUsIm5iZiI6MTc5MjU4NjUzNSwianRpIjoiTzhSanV6UHlRVW5YbVBMcyIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.V9QASIGRr4NC6iXXYGHKnh13Wvh3014I0BPzkgGVH9o\",\n    \"token_type\": \"bearer\",\n    \"expires_in\": 3600,\n    \"user\": {\n      \"name\": \"eslam\",\n      \"email\": \"eslam@gmail.com\",\n      \"updated_at\": \"2026-10-21T12:42:15.000000Z\",\n      \"created_at\": \"2026-10-21T12:42:15.000000Z\",\n      \"id\": 5\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "billie59@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/login",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": true
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "test@example.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "password",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Wed, 21 Oct 2026 12:17:48 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 200,\n  \"success\": true,\n  \"result\": {\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzkyNTg1MDY4LCJleHAiOjE3OTI1ODg2NjgsIm5iZiI6MTc5MjU4NTA2OCwianRpIjoiWDk4VVRvSjlnZWJodHF0ZiIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.-5WSrWtDPIo5eePzuBpYi-vHjRK9bsJmJsAKtkluFr0\",\n    \"token_type\": \"bearer\",\n    \"expires_in\": 3600,\n    \"user\": {\n      \"id\": 3,\n      \"name\": \"Test User\",\n      \"email\": \"test@example.com\",\n      \"email_verified_at\": \"2026-10-21T12:17:23.000000Z\",\n      \"created_at\": \"2026-10-21T12:17:23.000000Z\",\n      \"updated_at\": \"2026-10-21T12:17:23.000000Z\"\n    }\n  }\n}"
+            },
+            {
+              "name": "error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": true
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "test@example.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "passwordsadasdasddasd",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Wed, 21 Oct 2026 12:18:19 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 401,\n  \"success\": false,\n  \"error\": {\n    \"message\": \"Invalid credentials.\"\n  }\n}"
+            },
+            {
+              "name": "validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "billie59@example.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "password",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 12:10:37 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 422,\n  \"success\": false,\n  \"error\": {\n    \"password\": [\n      \"The password field is required.\"\n    ]\n  },\n  \"message\": \"The password field is required.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "refresh token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/refresh",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "refresh"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "refresh token",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/refresh",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "refresh"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Wed, 21 Oct 2026 12:21:56 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 200,\n  \"success\": true,\n  \"result\": {\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3JlZnJlc2giLCJpYXQiOjE3OTI1ODUxMzcsImV4cCI6MTc5MjU4ODkxNiwibmJmIjoxNzkyNTg1MzE2LCJqdGkiOiJpM3Y0WnpscUt0Y01vNmdaIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.gaq0FR9N5fjIT0JX8ZShHFUoavUFwny-2VKyTdD5AHM\",\n    \"token_type\": \"bearer\",\n    \"expires_in\": 3600\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/logout",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "logout",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/logout",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "logout"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Wed, 21 Oct 2026 12:24:22 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 200,\n  \"success\": true,\n  \"result\": {\n    \"message\": \"Successfully logged out.\"\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "store",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "items[0][product_name]",
+                  "value": "Quod blanditiis id",
+                  "type": "text"
+                },
+                {
+                  "key": "items[0][quantity]",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "items[1][product_name]",
+                  "value": "Quod blanditiis id",
+                  "type": "text"
+                },
+                {
+                  "key": "items[1][quantity]",
+                  "value": "3",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/orders",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "insufficient",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "items[0][product_name]",
+                      "value": "Sint et quis",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[0][quantity]",
+                      "value": "4",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[1][product_name]",
+                      "value": "Quod blanditiis id",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[1][quantity]",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/orders",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Wed, 21 Oct 2026 15:01:51 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 422,\n  \"success\": false,\n  \"error\": {\n    \"message\": \"Insufficient stock for \\\"Sint et quis\\\".\"\n  }\n}"
+            },
+            {
+              "name": "store",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "items[0][product_name]",
+                      "value": "Sint et quis",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[0][quantity]",
+                      "value": "1",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[1][product_name]",
+                      "value": "Quod blanditiis id",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[1][quantity]",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/orders",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Wed, 21 Oct 2026 15:07:02 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 201,\n  \"success\": true,\n  \"result\": {\n    \"id\": 36,\n    \"status\": \"pending\",\n    \"total_amount\": \"779.27\",\n    \"items\": [\n      {\n        \"id\": 80,\n        \"product_id\": 3,\n        \"product_name\": \"Sint et quis\",\n        \"quantity\": 1,\n        \"unit_price\": \"28.97\",\n        \"line_total\": \"28.97\"\n      },\n      {\n        \"id\": 81,\n        \"product_id\": 5,\n        \"product_name\": \"Quod blanditiis id\",\n        \"quantity\": 3,\n        \"unit_price\": \"250.10\",\n        \"line_total\": \"750.30\"\n      }\n    ],\n    \"user\": {\n      \"id\": 11,\n      \"name\": \"Test User\",\n      \"email\": \"test@example.com\",\n      \"phone\": \"240-495-0984\"\n    },\n    \"created_at\": \"2026-10-21T15:07:02.000000Z\",\n    \"updated_at\": \"2026-10-21T15:07:02.000000Z\"\n  }\n}"
+            },
+            {
+              "name": "validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "items[0][product_name]",
+                      "value": "Quod blanditiis id",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "items[0][quantity]",
+                      "value": "1",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "items[1][product_name]",
+                      "value": "Quod blanditiis id",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "items[1][quantity]",
+                      "value": "3",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/orders",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 12:07:58 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 422,\n  \"success\": false,\n  \"error\": {\n    \"items\": [\n      \"The items field is required.\"\n    ]\n  },\n  \"message\": \"The items field is required.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "orders",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/orders?status=confirmed&perPage=10&page=1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "confirmed",
+                  "description": "pending - confirmed - cancelled"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "all",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/orders?perPage=10&page=1",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "confirmed",
+                      "description": "pending - confirmed - cancelled",
+                      "disabled": true
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 12:01:05 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 200,\n  \"success\": true,\n  \"result\": [\n    {\n      \"id\": 16,\n      \"status\": \"confirmed\",\n      \"isPayable\": true,\n      \"totalAmount\": \"1000.40\",\n      \"items\": [\n        {\n          \"id\": 41,\n          \"productId\": 5,\n          \"productName\": \"Quod blanditiis id\",\n          \"quantity\": 4,\n          \"unitPrice\": \"250.10\",\n          \"lineTotal\": \"1000.40\"\n        }\n      ],\n      \"createdAt\": \"2026-10-21T14:36:00.000000Z\",\n      \"updatedAt\": \"2026-10-21T14:36:00.000000Z\"\n    },\n    {\n      \"id\": 25,\n      \"status\": \"cancelled\",\n      \"isPayable\": false,\n      \"totalAmount\": \"1016.05\",\n      \"items\": [\n        {\n          \"id\": 63,\n          \"productId\": 5,\n          \"productName\": \"Quod blanditiis id\",\n          \"quantity\": 4,\n          \"unitPrice\": \"250.10\",\n          \"lineTotal\": \"1000.40\"\n        },\n        {\n          \"id\": 64,\n          \"productId\": 13,\n          \"productName\": \"Rem ex amet\",\n          \"quantity\": 1,\n          \"unitPrice\": \"15.65\",\n          \"lineTotal\": \"15.65\"\n        }\n      ],\n      \"createdAt\": \"2026-10-21T14:36:00.000000Z\",\n      \"updatedAt\": \"2026-10-21T14:36:00.000000Z\"\n    },\n    {\n      \"id\": 28,\n      \"status\": \"pending\",\n      \"isPayable\": false,\n      \"totalAmount\": \"2498.50\",\n      \"items\": [\n        {\n          \"id\": 70,\n          \"productId\": 12,\n          \"productName\": \"Aut dolores hic\",\n          \"quantity\": 5,\n          \"unitPrice\": \"499.70\",\n          \"lineTotal\": \"2498.50\"\n        }\n      ],\n      \"createdAt\": \"2026-10-21T14:36:00.000000Z\",\n      \"updatedAt\": \"2026-10-21T14:36:01.000000Z\"\n    },\n    {\n      \"id\": 29,\n      \"status\": \"cancelled\",\n      \"isPayable\": false,\n      \"totalAmount\": \"479.04\",\n      \"items\": [\n        {\n          \"id\": 71,\n          \"productId\": 11,\n          \"productName\": \"Rerum et similique\",\n          \"quantity\": 4,\n          \"unitPrice\": \"119.76\",\n          \"lineTotal\": \"479.04\"\n        }\n      ],\n      \"createdAt\": \"2026-10-21T14:36:00.000000Z\",\n      \"updatedAt\": \"2026-10-21T14:36:01.000000Z\"\n    },\n    {\n      \"id\": 30,\n      \"status\": \"confirmed\",\n      \"isPayable\": true,\n      \"totalAmount\": \"1846.79\",\n      \"items\": [\n        {\n          \"id\": 72,\n          \"productId\": 20,\n          \"productName\": \"Voluptatem aperiam exercitationem\",\n          \"quantity\": 5,\n          \"unitPrice\": \"273.55\",\n          \"lineTotal\": \"1367.75\"\n        },\n        {\n          \"id\": 73,\n          \"productId\": 11,\n          \"productName\": \"Rerum et similique\",\n          \"quantity\": 4,\n          \"unitPrice\": \"119.76\",\n          \"lineTotal\": \"479.04\"\n        }\n      ],\n      \"createdAt\": \"2026-10-21T14:36:00.000000Z\",\n      \"updatedAt\": \"2026-10-21T14:36:01.000000Z\"\n    }\n  ],\n  \"pagination\": {\n    \"currentPage\": 1,\n    \"perPage\": 10,\n    \"total\": 5,\n    \"lastPage\": 1\n  }\n}"
+            },
+            {
+              "name": "filtered",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/orders?status=confirmed&perPage=10&page=1",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "confirmed",
+                      "description": "pending - confirmed - cancelled"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 12:01:37 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 200,\n  \"success\": true,\n  \"result\": [\n    {\n      \"id\": 16,\n      \"status\": \"confirmed\",\n      \"isPayable\": true,\n      \"totalAmount\": \"1000.40\",\n      \"items\": [\n        {\n          \"id\": 41,\n          \"productId\": 5,\n          \"productName\": \"Quod blanditiis id\",\n          \"quantity\": 4,\n          \"unitPrice\": \"250.10\",\n          \"lineTotal\": \"1000.40\"\n        }\n      ],\n      \"createdAt\": \"2026-10-21T14:36:00.000000Z\",\n      \"updatedAt\": \"2026-10-21T14:36:00.000000Z\"\n    },\n    {\n      \"id\": 30,\n      \"status\": \"confirmed\",\n      \"isPayable\": true,\n      \"totalAmount\": \"1846.79\",\n      \"items\": [\n        {\n          \"id\": 72,\n          \"productId\": 20,\n          \"productName\": \"Voluptatem aperiam exercitationem\",\n          \"quantity\": 5,\n          \"unitPrice\": \"273.55\",\n          \"lineTotal\": \"1367.75\"\n        },\n        {\n          \"id\": 73,\n          \"productId\": 11,\n          \"productName\": \"Rerum et similique\",\n          \"quantity\": 4,\n          \"unitPrice\": \"119.76\",\n          \"lineTotal\": \"479.04\"\n        }\n      ],\n      \"createdAt\": \"2026-10-21T14:36:00.000000Z\",\n      \"updatedAt\": \"2026-10-21T14:36:01.000000Z\"\n    }\n  ],\n  \"pagination\": {\n    \"currentPage\": 1,\n    \"perPage\": 10,\n    \"total\": 2,\n    \"lastPage\": 1\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "_method",
+                  "value": "PATCH",
+                  "type": "text"
+                },
+                {
+                  "key": "items[0][product_name]",
+                  "value": "Et laboriosam omnis",
+                  "type": "text"
+                },
+                {
+                  "key": "items[0][quantity]",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "items[1][product_name]",
+                  "value": "Quod blanditiis id",
+                  "type": "text"
+                },
+                {
+                  "key": "items[1][quantity]",
+                  "value": "4",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/orders/{{orderId}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders",
+                "{{orderId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "update",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "_method",
+                      "value": "PATCH",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[0][product_name]",
+                      "value": "Et laboriosam omnis",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[0][quantity]",
+                      "value": "2",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[1][product_name]",
+                      "value": "Quod blanditiis id",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[1][quantity]",
+                      "value": "4",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/orders/{{orderId}}",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 09:19:50 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 200,\n  \"success\": true,\n  \"result\": {\n    \"id\": 36,\n    \"status\": \"pending\",\n    \"isPayable\": false,\n    \"totalAmount\": \"1898.38\",\n    \"items\": [\n      {\n        \"id\": 90,\n        \"productId\": 6,\n        \"productName\": \"Et laboriosam omnis\",\n        \"quantity\": 2,\n        \"unitPrice\": \"448.99\",\n        \"lineTotal\": \"897.98\"\n      },\n      {\n        \"id\": 91,\n        \"productId\": 5,\n        \"productName\": \"Quod blanditiis id\",\n        \"quantity\": 4,\n        \"unitPrice\": \"250.10\",\n        \"lineTotal\": \"1000.40\"\n      }\n    ],\n    \"user\": {\n      \"id\": 11,\n      \"name\": \"Test User\",\n      \"email\": \"test@example.com\",\n      \"phone\": \"240-495-0984\"\n    },\n    \"createdAt\": \"2026-10-21T15:07:02.000000Z\",\n    \"updatedAt\": \"2026-10-22T09:19:50.000000Z\"\n  }\n}"
+            },
+            {
+              "name": "insufficient",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "_method",
+                      "value": "PATCH",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[0][product_name]",
+                      "value": "Et laboriosam omnis",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[0][quantity]",
+                      "value": "1000",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[1][product_name]",
+                      "value": "Quod blanditiis id",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[1][quantity]",
+                      "value": "4",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/orders/{{orderId}}",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 09:20:31 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 422,\n  \"success\": false,\n  \"error\": {\n    \"message\": \"Insufficient stock for \\\"Et laboriosam omnis\\\".\"\n  }\n}"
+            },
+            {
+              "name": "validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "_method",
+                      "value": "PATCH",
+                      "type": "text"
+                    },
+                    {
+                      "key": "items[0][product_name]",
+                      "value": "Et laboriosam omnis",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "items[0][quantity]",
+                      "value": "1",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "items[1][product_name]",
+                      "value": "Quod blanditiis id",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "items[1][quantity]",
+                      "value": "4",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/orders/{{orderId}}",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 12:08:50 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 422,\n  \"success\": false,\n  \"error\": {\n    \"items\": [\n      \"The items field is required.\"\n    ]\n  },\n  \"message\": \"The items field is required.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "_method",
+                  "value": "DELETE",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/orders/{{orderId}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders",
+                "{{orderId}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "delete",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "_method",
+                      "value": "DELETE",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/orders/{{orderId}}",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 11:42:42 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 200,\n  \"success\": true,\n  \"result\": {\n    \"message\": \"Order deleted.\"\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "store",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "method",
+                  "value": "stripe",
+                  "type": "text"
+                },
+                {
+                  "key": "currency",
+                  "value": "usd",
+                  "type": "text"
+                },
+                {
+                  "key": "payment_method",
+                  "value": "pm_card_visa",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/orders/{{orderId}}/payments",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders",
+                "{{orderId}}",
+                "payments"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "store",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "method",
+                      "value": "stripe",
+                      "type": "text"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "usd",
+                      "type": "text"
+                    },
+                    {
+                      "key": "payment_method",
+                      "value": "pm_card_visa",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/orders/{{orderId}}/payments",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "{{orderId}}",
+                    "payments"
+                  ]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 10:48:55 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 422,\n  \"success\": false,\n  \"error\": {\n    \"message\": \"Stripe secret key is not configured.\"\n  }\n}"
+            },
+            {
+              "name": "validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "method",
+                      "value": "stripe",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "currency",
+                      "value": "usd",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "payment_method",
+                      "value": "pm_card_visa",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/orders/{{orderId}}/payments",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "{{orderId}}",
+                    "payments"
+                  ]
+                }
+              },
+              "status": "Unprocessable Content",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 12:09:39 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 422,\n  \"success\": false,\n  \"error\": {\n    \"method\": [\n      \"The method field is required.\"\n    ]\n  },\n  \"message\": \"The method field is required.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "index",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/orders/{{orderId}}/payments?perPage=10",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "orders",
+                "{{orderId}}",
+                "payments"
+              ],
+              "query": [
+                {
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/orders/{{orderId}}/payments",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "{{orderId}}",
+                    "payments"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 11:01:31 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 403,\n  \"success\": false,\n  \"error\": {\n    \"message\": \"Forbidden.\"\n  }\n}"
+            },
+            {
+              "name": "index",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/orders/{{orderId}}/payments?perPage=10&page=1",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "{{orderId}}",
+                    "payments"
+                  ],
+                  "query": [
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "host",
+                  "value": "localhost:8000"
+                },
+                {
+                  "key": "connection",
+                  "value": "close"
+                },
+                {
+                  "key": "x-powered-by",
+                  "value": "PHP/8.2.12"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "date",
+                  "value": "Thu, 22 Oct 2026 12:04:49 GMT"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": 200,\n  \"success\": true,\n  \"result\": [\n    {\n      \"id\": 4,\n      \"orderId\": 16,\n      \"amount\": \"1000.40\",\n      \"status\": \"pending\",\n      \"method\": \"bank_transfer\",\n      \"transactionReference\": \"f49c6f1e-f4ac-3d13-b898-56daa66eeaf2\",\n      \"createdAt\": \"2026-10-21T14:36:01.000000Z\",\n      \"updatedAt\": \"2026-10-21T14:36:01.000000Z\"\n    }\n  ],\n  \"pagination\": {\n    \"currentPage\": 1,\n    \"perPage\": 10,\n    \"total\": 1,\n    \"lastPage\": 1\n  }\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
