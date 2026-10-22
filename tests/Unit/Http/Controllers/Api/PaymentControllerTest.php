@@ -48,6 +48,26 @@ class PaymentControllerTest extends TestCase
         $this->assertCount(2, $data['result']);
     }
 
+    public function test_index_paginates_payments(): void
+    {
+        $user = User::factory()->create();
+        $order = Order::factory()->for($user)->confirmed()->create();
+        Payment::factory()->for($order)->count(3)->create();
+
+        $request = $this->makeRequest(Request::class, ['perPage' => 2], $user, 'GET');
+
+        $response = (new PaymentController)->index($request, $order);
+        $data = $response->getData(true);
+
+        $this->assertCount(2, $data['result']);
+        $this->assertSame([
+            'currentPage' => 1,
+            'perPage' => 2,
+            'total' => 3,
+            'lastPage' => 2,
+        ], $data['pagination']);
+    }
+
     public function test_index_is_forbidden_for_other_users_order(): void
     {
         $owner = User::factory()->create();

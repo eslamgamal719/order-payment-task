@@ -53,6 +53,25 @@ class PaymentControllerTest extends TestCase
         $this->assertCount(2, $response->json('result'));
     }
 
+    public function test_order_payments_listing_is_paginated(): void
+    {
+        $user = User::factory()->create();
+        $order = Order::factory()->for($user)->confirmed()->create();
+        Payment::factory()->for($order)->count(3)->create();
+
+        $response = $this->withHeaders($this->authHeader($user))
+            ->getJson("/api/orders/{$order->id}/payments?perPage=2");
+
+        $response->assertStatus(200);
+        $this->assertCount(2, $response->json('result'));
+        $this->assertSame([
+            'currentPage' => 1,
+            'perPage' => 2,
+            'total' => 3,
+            'lastPage' => 2,
+        ], $response->json('pagination'));
+    }
+
     public function test_user_cannot_list_other_users_order_payments(): void
     {
         $owner = User::factory()->create();

@@ -11,7 +11,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Tests\TestCase;
 
-
 class OrderControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -54,6 +53,34 @@ class OrderControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertCount(1, $response->json('result'));
         $this->assertSame('confirmed', $response->json('result.0.status'));
+    }
+
+    public function test_orders_listing_is_paginated(): void
+    {
+        $user = User::factory()->create();
+        Order::factory()->for($user)->count(3)->create();
+
+        $response = $this->withHeaders($this->authHeader($user))
+            ->getJson('/api/orders?perPage=2');
+
+        $response->assertStatus(200);
+        $this->assertCount(2, $response->json('result'));
+        $this->assertSame([
+            'currentPage' => 1,
+            'perPage' => 2,
+            'total' => 3,
+            'lastPage' => 2,
+        ], $response->json('pagination'));
+    }
+
+    public function test_orders_listing_rejects_invalid_per_page(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->withHeaders($this->authHeader($user))
+            ->getJson('/api/orders?perPage=0');
+
+        $response->assertStatus(422);
     }
 
     public function test_user_can_create_order(): void
