@@ -15,4 +15,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/orders', [OrderController::class, 'store']);
     Route::patch('/orders/{order}', [OrderController::class, 'update']);
     Route::delete('/orders/{order}', [OrderController::class, 'destroy']);
+
+    Route::get('/orders/{order}/payments', [PaymentController::class, 'index']);
+    Route::post('/orders/{order}/payments', [PaymentController::class, 'store']);
+
 });
